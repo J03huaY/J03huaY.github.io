@@ -4,7 +4,7 @@ A small static site built with **HTML and CSS only** — no JavaScript, no CSS f
 It holds a playable mini crossword, plus pages about my experience and how to reach me.
 More games will be added over the semester.
 
-**Live site:** _(add URL once Pages is enabled)_
+**Live site:** <https://j03huay.github.io/the-arcade/>
 
 ## Pages
 
