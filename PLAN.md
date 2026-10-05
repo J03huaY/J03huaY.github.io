@@ -1,169 +1,177 @@
-# 三天计划 · Project 1 The Arcade
+# 一天半计划 · Project 1 The Arcade
 
-**周期：10/01（四）→ 10/03（六）** · 预估总工时 ~19h
+**周期：10/05（日）全天 + 10/06（一）上午** · 可用约 13h
 
-排期原则：**先地基，后内容，风险前置。** 填字游戏是唯一有技术不确定性的部分（CSS-only
-揭示答案、格子编号、无障碍命名），所以 Day 1 收尾就用一个 30 分钟的 spike 验证思路可行，
-不把它留到 Day 3 才发现做不出来。
+> 原三天计划已作废（见 git 历史）。当前进度：`tokens.css` 颜色部分完成，其余全空。
 
----
+## 压缩后的核心策略
 
-## Day 0 · 现在（15 min）
-
-- [x] 终端里完成 `gh auth login`
-- [x] 远端仓库已建 + GitHub Pages 已开启
-- [x] 线上验证通过：`/` 和 `/game/` 均返回 200（页面空白是正常的，源文件还是空的）
-
-> 第一天就把部署打通，而不是最后一天。这样后面每次 push 都能立刻在手机上
-> 真机看效果，也避免 deadline 前才发现 Pages 配置有问题。
+1. **不设独立的检查阶段。** 原计划 Day 3 有 3h 的"验证 + 修"，现在没有这个预算。
+   改为：每写完一个文件当场验（W3C、键盘、对比度），错了立刻改。
+2. **高风险的先做。** 填字游戏（15 分）排在精力最好的时段，不留到最后。
+3. **"免费的 20 分"靠清单拿。** HTML 元素（10 分）和 CSS 特性（10 分）不需要额外工时 ——
+   边写边对照下面那张清单勾掉就行，但**必须边写边勾**，不能等到最后补。
+4. **要牺牲的是设计分（10 分）里的精致度**，不是任何硬性技术项。四页内容写薄一点、
+   装饰性元素少一点，但 rubric 上每一条技术要求都要满足。
 
 ---
 
-## Day 1 · 10/01（四）· ~7h
+## 今天 10/05 · 约 9h
 
-### 1.1 设计决策（1h）— 不写代码，只做决定
+### A1 · 补完 tokens.css（20 min）
 
-这一步偷懒的话，后面每个颜色和尺寸都要返工。rubric 明确要求
-"You should be able to justify every color and size on the page"。
+- [ ] 字号 6 个：`--font-size-sm/base/lg/xl/2xl/h1`
+- [ ] 间距 9 个：`--space-1` … `--space-9`
+- [ ] 其他 3 个：`--radius` `--measure` `--font-sans`
+- [ ] **commit**
 
-- [ ] **字体**：挑 1–2 个（正文 + 可选标题）。想清楚为什么——屏幕可读性，不是好看
-- [ ] **type scale**：定 5–6 级，用一个比例（1.25 或 1.333）推出来，别手挑数字
-- [ ] **中性色阶**：5–7 级灰（背景、边框、次要文字、正文、标题）
-- [ ] **强调色**：**一个**。检查它在你的背景上对比度 ≥ 4.5:1
-- [ ] **间距比例**：基于 4px 或 8px 的倍数，定 6 级
-- [ ] 写进 `assets/css/tokens.css`，全部作为自定义变量
+### A2 · base.css（40 min）
 
-**验收**：`tokens.css` 里有完整的 `:root {}`，之后的 CSS 里几乎不出现硬编码的颜色和 px。
+- [ ] 轻量 reset：`box-sizing: border-box`、`margin` 归零、`img { max-width: 100% }`
+- [ ] `body` 设 `font-family` `background-color` `color` `line-height: 1.6`
+- [ ] h1–h6 套用字号变量，h1 加 `font-weight: 700` + `letter-spacing: -0.02em`
+- [ ] 正文容器 `max-width: var(--measure)`
+- [ ] **全局 `:focus-visible`** —— 现在就写，别留到明天
+- [ ] **commit**
 
-### 1.2 base.css（1h）
+### A3 · Navbar + layout.css（2h）← 15 分，单位时间回报最高
 
-- [ ] 轻量 reset（`box-sizing`、`margin` 归零、`img` 响应式）
-- [ ] 基础排版：`font-family`、行高、正文行宽上限（45–75 字符）
-- [ ] 字体导入（`@font-face` 或 Google Fonts 的 `<link>`）
-- [ ] 全局 `:focus-visible` 样式——**现在就定好**，不要留到无障碍环节
+先建一个最小的 `index.html`（只有 header/nav/main/footer 骨架）把导航调通，
+再去填内容。
 
-**验收**：随便打开一个页面写几行 `<p>` 和 `<h1>`，已经像个设计过的东西。
-
-### 1.3 Navbar + layout.css（2.5h）— 占 15 分，最高性价比
-
-- [ ] `<nav>` + `<ul>` + `<li>` + `<a>`，**不用 div**
-- [ ] `position: sticky`，未滚动时不遮挡内容
+- [ ] `<nav>` + `<ul>` + `<li>` + `<a>`，不用 `div`
+- [ ] `position: sticky; top: 0`，未滚动时不遮挡内容
 - [ ] 含你名字的站点标题
-- [ ] 四个页面链接
-- [ ] 当前页标识：给 `<body>` 或当前 `<a>` 加一个 class（如 `aria-current="page"`，
-      既是语义又能当选择器用）
-- [ ] 键盘 Tab 全程可用，focus 清晰可见
-- [ ] 顺手把共享 `<header>` / `<footer>` 也写进 `layout.css`
+- [ ] 四个链接：`/` `/game/` `/about/` `/contact/`（**相对路径**，见下方陷阱）
+- [ ] 当前页用 `aria-current="page"` 标记 + CSS 选择器做视觉标识（小方块，呼应网格母题）
+- [ ] Tab 走一遍，focus 可见
+- [ ] 共享 `<footer>` 一起写掉
+- [ ] **commit**
 
-**验收**：拔掉鼠标，只用 Tab 和回车能走完整个导航。
+### A4 · 填字游戏（3.5h）← 高风险，趁精力好
 
-### 1.4 Landing page（1h）
+- [ ] 定题：5×5，用 AI 生成线索和答案也可以（**必须写进 writeup credits**）
+- [ ] 黑格安排 4–5 个 → 开放格降到约 20 个，少 5 个 input 就少 5 条 aria-label
+- [ ] `display: grid` 画网格，黑格白格视觉区分
+- [ ] 线索编号用**伪元素**定位在格子角上 → 顺手满足"≥1 个伪元素"
+- [ ] 每个开放格 `<input type="text" maxlength="1">`
+- [ ] **每个 input 一条 `aria-label`**，如 `"Row 1, column 2, 3 Across"`
+      → 这步最枯燥也最容易被砍，但它同时是无障碍分和填字分的硬性项
+- [ ] Across / Down 各一个 `<ol>`
+- [ ] 揭示答案用 `<details>/<summary>` —— **绝不能只靠 `:hover`**
+- [ ] 格子 ≥ 44×44px，且用 `min()` 之类让它跟视口缩放，别写死 px
+- [ ] 手机宽度下自测一次
+- [ ] **commit**
 
-- [ ] `/` 介绍站点，header 里有到 `/game` 的链接
-- [ ] 用上 `main`、`section` 或 `article`、`h1`、`p`、`img`（有意义 alt）
-- [ ] 这是四页里视觉权重最高的一页，花点心思
+### A5 · Landing page 内容（1.5h）
 
-### 1.5 填字 spike（30 min）— 只验证可行性，不求好看
+- [ ] 介绍站点，header 里有到 `/game/` 的链接
+- [ ] `main` + `section` 或 `article` + `h1` + `p` + `img`（有意义 alt）
+- [ ] 用 `display: flex` 排点东西 → 勾掉 CSS 清单那一项
+- [ ] **commit**
 
-- [ ] 5×5 的 `display: grid`，黑格白格能区分
-- [ ] 一个 `<input maxlength="1">` 能打字、能 Tab 到下一格
-- [ ] `<details>/<summary>` 或纯 CSS toggle 能切换显示一段文字
+### A6 · About + Contact（1h，各 30 min）
 
-**验收**：三个机制都跑通了，Day 2 就只是"做完"而不是"研究"。
+薄但完整。内容不计分（不查错别字语法，信息可以编）。
 
-**Day 1 commit**：地基 + navbar + landing page，push，线上看一眼。
-
----
-
-## Day 2 · 10/02（五）· ~7h
-
-### 2.1 填字游戏（4h）— 本项目的核心
-
-- [ ] 确定题目：自己编 / 改公共领域的 / 用 AI 生成线索与答案
-      → 改编或 AI 生成的**必须写进 `WRITEUP.md` 的 credits**
-- [ ] 画出网格（≥5×5），黑格视觉区分
-- [ ] 线索编号定位在格子角上 → 考虑用伪元素（顺便满足"≥1 个伪元素"要求）
-- [ ] 每个开放格一个 `<input maxlength="1">`
-- [ ] **每个 input 一个 `aria-label`**，形如 `"Row 1, column 2, 3 Across"`
-      → 25 个无标签输入框对屏幕阅读器完全不可用，这是明确扣分项
-- [ ] Across / Down 线索用真正的 `<ol>`（编号本来就是有序的）
-- [ ] 揭示答案：`<details>` 最省事且天生键盘可用。
-      **绝对不能只靠 `:hover`** —— 手机没有 hover，键盘也到不了
-- [ ] 格子尺寸 ≥ 44×44px
-
-**验收**：手机上能点进格子打字、能揭示答案；键盘上同样两件事都能做到。
-
-### 2.2 About 页（1.5h）
-
-- [ ] 经历、教育，用 `section` / `article` 分块
-- [ ] 标题层级是真实大纲（`h1` → `h2` → `h3`），不是按字号挑的
-- [ ] 列表用 `ul` / `ol`
-
-### 2.3 Contact 页（1.5h）
-
-- [ ] email、GitHub、LinkedIn，只放你愿意让专业人士看到的社交账号
-- [ ] **`label` + `input` 的硬性要求**可以放在这里（一个联系表单，纯 HTML 没有后端
-      也没关系，重点是标签正确关联）
-- [ ] 考虑 SVG 图标（允许导入），对视觉一致性帮助很大
-
-**Day 2 commit**：四页内容完整，push。
+- [ ] About：经历 + 教育，`section` 分块，标题层级真实，`ul`/`ol` 列点
+- [ ] Contact：email / GitHub / LinkedIn
+- [ ] **Contact 页放一个联系表单** → 满足 `label` + `input` 硬性要求（没后端没关系）
+- [ ] **commit + push**
 
 ---
 
-## Day 3 · 10/03（六）· ~5h
+## 明天 10/06 上午 · 约 4h
 
-### 3.1 移动端（1.5h）
+### B1 · 移动端（1h）
 
 - [ ] `@media` 查询
-- [ ] **320px** 下逐页检查：无横向滚动、文字不溢出、网格能放下
-- [ ] **864px** 下逐页检查
-- [ ] 小屏导航变形（移到底部是个好选择，拇指也更容易点）
-- [ ] 所有点击目标 ≥ 44×44px，**包括填字格**
-- [ ] 真机看一遍，不只看浏览器的响应式模拟
+- [ ] **320px** 四页逐一检查：无横向滚动、文字不溢出、网格放得下
+- [ ] **864px** 四页逐一检查
+- [ ] 小屏导航变形（移到底部）
+- [ ] 点击目标 ≥ 44×44px，**包括填字格**
 
-### 3.2 无障碍（1.5h）
+### B2 · 无障碍 + Lighthouse（1h）
 
-- [ ] 全站纯键盘走一遍，focus 全程可见
-- [ ] 所有文字对比度 ≥ 4.5:1（浏览器 DevTools 能直接量）
-- [ ] 所有 `img` 有合适 alt，装饰性图片用 `alt=""`
-- [ ] 所有 input 有 accessible name
-- [ ] 搜一遍有没有可点击的 `div`——能点的必须是 `<button>` 或 `<a>`
-- [ ] **Lighthouse ≥ 95**，截图保存
+- [ ] 纯键盘走完四页，focus 全程可见
+- [ ] 所有 `img` 有合适 alt，装饰图 `alt=""`，装饰性网格 `aria-hidden="true"`
+- [ ] 搜一遍有没有可点击的 `div`
+- [ ] **Lighthouse ≥ 95，截图存好**
 
-### 3.3 代码与验证（1h）
+### B3 · 验证 + 清理（45 min）
 
-- [ ] **W3C validator 四页都零 error**（`validator.w3.org`）
-- [ ] 对照 CSS 清单逐项确认：`position`、`grid`、`flex`、`@media`、自定义变量、
-      ≥2 个伪类、≥1 个伪元素、`:focus-visible`、`transition`/`transform`
-- [ ] 对照 HTML 清单逐项确认
-- [ ] 确认仓库里**没有任何 `.js` 文件**
-- [ ] 格式统一，命名一致，删掉死代码和注释掉的实验
+- [ ] **W3C validator 四页零 error**
+- [ ] 对照下方两张清单逐项确认
+- [ ] 确认仓库无任何 `.js` 文件
+- [ ] 删掉死代码和注释掉的实验
 
-### 3.4 Writeup + 提交（1h）
+### B4 · Writeup（45 min）
 
-- [ ] 填 `WRITEUP.md`，每个问题 ≥ 3 句
-- [ ] credits 一栏：字体、图标、改编的题目、AI 协助范围，都写清楚
-- [ ] 最后 push，确认线上站点是最新版
-- [ ] 提交：线上链接 + 仓库链接 + writeup + Lighthouse 截图
+- [ ] 填 `WRITEUP.md`，每题 ≥ 3 句
+- [ ] credits：字体栈（无导入）、AI 协助范围、填字题来源
+
+### B5 · 提交 + buffer（30 min）
+
+- [ ] 最后 push，确认线上是最新版
+- [ ] 交：线上链接 + 仓库链接 + writeup + Lighthouse 截图
 
 ---
 
-## 风险点
+## 边写边勾的清单（这是那"免费的 20 分"）
 
-| 风险 | 应对 |
-| --- | --- |
-| 填字做不出来，卡在 Day 3 | Day 1 的 spike 提前验证三个机制 |
-| Pages 部署踩坑（相对路径 404） | Day 0 就打通部署，每天 push 后看线上 |
-| 设计反复返工 | Day 1.1 先定 token，不边写边改 |
-| W3C 报错一堆 | 每页写完当场验，不堆到最后 |
-| 320px 下填字格放不下 | 用 `min()` / `vw` 之类让格子跟视口缩放，别写死 px |
+**HTML 元素** —— 写页面时自然就会用到，但要确认一个都没漏
+
+- [ ] `header` `nav` `main` `footer`（A3 一次搞定）
+- [ ] `section` 或 `article`（A5）
+- [ ] `h1`–`h6` 真实大纲层级
+- [ ] `a` `img`（有 alt） `p`
+- [ ] `ul` 或 `ol`（导航是 `ul`，线索是 `ol`，A3/A4 已覆盖）
+- [ ] `label` + `input`（A4 填字格 + A6 表单）
+
+**CSS 特性**
+
+- [ ] `font-family`（A2）
+- [ ] `background` 或 `background-color`（A2）
+- [ ] `margin` 和 `padding`（到处）
+- [ ] `position`（A3 sticky 导航）
+- [ ] `display: grid`（A4 填字）
+- [ ] `display: flex`（A3 导航或 A5）
+- [ ] `@media`（B1）
+- [ ] 自定义变量（A1）
+- [ ] **≥ 2 个不同伪类**（`:hover` `:focus-visible` `:nth-child` 任选两个以上）
+- [ ] **≥ 1 个伪元素**（A4 线索编号用 `::before`）
+- [ ] `:focus-visible` 刻意设计（A2）
+- [ ] `transition` 或 `transform`（A3 导航 hover 或 A4 格子）
+
+---
+
+## 两个会浪费时间的陷阱
+
+**1. 绝对路径会在线上 404。** 站点在 `/the-arcade/` 子路径下，所以：
+
+```html
+<!-- 根页面 index.html -->
+<link rel="stylesheet" href="assets/css/tokens.css">
+<a href="game/">Puzzle</a>
+
+<!-- 子页面 game/index.html -->
+<link rel="stylesheet" href="../assets/css/tokens.css">
+<a href="../about/">About</a>
+```
+
+写成 `/assets/...` 或 `/about/`（开头带斜杠）本地看着正常，一上线全挂。
+
+**2. CSS 引入顺序错了变量就是空的。**
+
+```
+tokens.css → base.css → layout.css → 页面自己的 css
+```
+
+变量必须先定义。顺序反了不报错，只是颜色字号全部失效，很难查。
+
+---
 
 ## 关于加分
 
-提前 48 小时提交得 5 分。如果课程 deadline 在 **10/05 之后**，按这个计划 10/03 完成
-就能拿到。查一下实际 deadline——这 5 分基本是白送的。
-
-## 建议的提交节奏
-
-每个 block 做完就 commit，别攒一天。commit message 写清做了什么。
-TA 会看仓库，一个有清晰历史的仓库本身就是加分印象。
+提前 48h 的 5 分加分，按这个时间线基本拿不到了。**去确认一下实际 deadline** ——
+如果 deadline 其实在 10/08 之后，那 10/06 交完还是能拿到，值得查一眼。
