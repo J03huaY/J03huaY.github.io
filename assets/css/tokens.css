@@ -11,5 +11,26 @@
   --color-dark: #2A2740;
 
   /* font text */
-  
+  --font-size-sm: 13px;
+  --font-size-base: 16px;
+  --font-size-lg: 20px;
+  --font-size-xl: 25px;
+  --font-size-2xl: 31px;
+  --font-size-h1: clamp(2.25rem, 1.5rem + 3.5vw, 3.5rem);
+
+  /* space */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+
+  /* other formatting */
+  --radius: 4px;
+  --measure: 65ch;
+  --font-sans: system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
 }
