@@ -4,7 +4,7 @@ A small static site built with **HTML and CSS only** — no JavaScript, no CSS f
 It holds a playable mini crossword, plus pages about my experience and how to reach me.
 More games will be added over the semester.
 
-**Live site:** <https://j03huay.github.io/the-arcade/>
+**Live site:** <https://j03huay.github.io>
 
 ## Pages
 
@@ -56,6 +56,7 @@ directly — `file://` does not resolve the directory-style URLs the same way.
 ## Notes
 
 - Built for a course project. No JavaScript anywhere in this repository, by design.
-- Stylesheets are linked with **relative** paths (`assets/...` from the root,
-  `../assets/...` from a subpage) so the site works both locally and under the
-  GitHub Pages project subpath.
+- This is a GitHub user site, so it is served from the domain root. Links and
+  stylesheets use **root-relative** paths (`/assets/css/base.css`, `/game/`),
+  which resolve identically on every page and in local preview — so the shared
+  navigation really is the same markup on all four pages.

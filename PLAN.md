@@ -20,10 +20,10 @@
 
 ### A1 · 补完 tokens.css（20 min）
 
-- [ ] 字号 6 个：`--font-size-sm/base/lg/xl/2xl/h1`
-- [ ] 间距 9 个：`--space-1` … `--space-9`
-- [ ] 其他 3 个：`--radius` `--measure` `--font-sans`
-- [ ] **commit**
+- [x] 字号 6 个：`--font-size-sm/base/lg/xl/2xl/h1`
+- [x] 间距 9 个：`--space-1` … `--space-9`
+- [x] 其他 3 个：`--radius` `--measure` `--font-sans`
+- [x] **commit**
 
 ### A2 · base.css（40 min）
 
@@ -42,7 +42,7 @@
 - [ ] `<nav>` + `<ul>` + `<li>` + `<a>`，不用 `div`
 - [ ] `position: sticky; top: 0`，未滚动时不遮挡内容
 - [ ] 含你名字的站点标题
-- [ ] 四个链接：`/` `/game/` `/about/` `/contact/`（**相对路径**，见下方陷阱）
+- [ ] 四个链接：`/` `/game/` `/about/` `/contact/`（根相对路径，四页一致）
 - [ ] 当前页用 `aria-current="page"` 标记 + CSS 选择器做视觉标识（小方块，呼应网格母题）
 - [ ] Tab 走一遍，focus 可见
 - [ ] 共享 `<footer>` 一起写掉
@@ -147,19 +147,18 @@
 
 ## 两个会浪费时间的陷阱
 
-**1. 绝对路径会在线上 404。** 站点在 `/the-arcade/` 子路径下，所以：
+**1. 路径统一用根相对写法（开头带 `/`）。** 仓库已改名为 `J03huaY.github.io`，
+站点在域名根目录，所以四个页面的路径写法完全一致：
 
 ```html
-<!-- 根页面 index.html -->
-<link rel="stylesheet" href="assets/css/tokens.css">
-<a href="game/">Puzzle</a>
-
-<!-- 子页面 game/index.html -->
-<link rel="stylesheet" href="../assets/css/tokens.css">
-<a href="../about/">About</a>
+<link rel="stylesheet" href="/assets/css/tokens.css">
+<a href="/game/">Puzzle</a>
+<a href="/about/">About</a>
 ```
 
-写成 `/assets/...` 或 `/about/`（开头带斜杠）本地看着正常，一上线全挂。
+**不要**写 `assets/...` 或 `../assets/...` —— 那种相对路径在不同层级的页面里含义不同，
+导航就没法真正复制粘贴，也是最容易写错的地方。根相对路径本地预览
+（`localhost:8000`）和线上都对。
 
 **2. CSS 引入顺序错了变量就是空的。**
 
