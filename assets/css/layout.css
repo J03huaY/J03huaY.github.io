@@ -16,7 +16,9 @@ header {
   color: var(--color-heading);
   text-decoration: none;
   font-weight: 700;
-  font-size: var(--font-size-lg);
+  font-style: italic;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: var(--font-size-2xl);
   align-self: flex-start;
   min-height: 44px;
   padding-block: var(--space-2);
@@ -53,6 +55,20 @@ nav a[aria-current="page"]::after {
   margin: 4px auto 0;
 }
 
+main {
+  padding: var(--space-5) var(--space-4);
+}
+
+main p {
+  max-width: var(--measure);
+  line-height: 1.5;
+  margin-bottom: var(--space-4);
+}
+
+.game-link {
+  display: inline-block;
+  min-height: 44px;
+}
 /* footer */
 footer { 
   color: var(--color-text-muted);
