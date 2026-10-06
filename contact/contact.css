@@ -1,0 +1,6 @@
+main a {
+    display: inline-block;
+    min-height: 44px;
+    padding-block: var(--space-3);
+    overflow-wrap: anywhere;
+}
