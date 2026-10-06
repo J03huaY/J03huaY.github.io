@@ -85,3 +85,29 @@ footer {
   padding: var(--space-5) var(--space-4);
   border-top: 1px solid var(--color-border);  
 }
+
+@media (max-width: 600px) {
+  header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-4);
+  }
+  .web-title {
+    align-self: flex-start;
+  }
+  
+  nav {
+    width: 100%;
+  }
+  
+  nav ul {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-2);
+  }
+  
+  nav a {
+    text-align: center;
+  }
+}  
