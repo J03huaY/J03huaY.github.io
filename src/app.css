@@ -10,19 +10,19 @@
   --color-accent-soft: #EDF3FF;
   --color-dark: #2A2740;
 
-  /* 2048 tiles: one blue hue from light to dark; numbers use --color-heading up to 64 and white from 128 */
-  --tile-2: #EEF2FB;
-  --tile-4: #DCE5F7;
-  --tile-8: #C3D3F2;
-  --tile-16: #A6BEEC;
-  --tile-32: #8AA9E6;
-  --tile-64: #7096E0;
-  --tile-128: #2F62C9;
-  --tile-256: #2556B8;
-  --tile-512: #1F4AA3;
-  --tile-1024: #1A3F8C;
-  --tile-2048: #143275;
-  --tile-super: #0D2152;
+  /* 2048 tiles: dark blues that get darker as the number grows; all use white text (contrast 4.92 to 17.18) */
+  --tile-2: #3D6BD6;
+  --tile-4: #3863C9;
+  --tile-8: #345CBB;
+  --tile-16: #2F54AE;
+  --tile-32: #2A4DA0;
+  --tile-64: #264593;
+  --tile-128: #213E85;
+  --tile-256: #1D3678;
+  --tile-512: #182F6A;
+  --tile-1024: #13275D;
+  --tile-2048: #0F204F;
+  --tile-super: #0A1842;
   --board-bg: #BDB6AE;
   --board-cell: #CFC9C2;
 

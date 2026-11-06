@@ -1,5 +1,6 @@
 <script>
 	import { game } from '#lib/game2048/game.svelte.js';
+	import Board from '#lib/components/game2048/Board.svelte';
 
 	const keyToDirection = {
 		ArrowLeft: 'left',
@@ -28,13 +29,7 @@
 <button onclick={() => game.newGame()}>New Game</button>
 <p>Score: {game.score} · Best: {game.best}</p>
 
-<div class="board">
-	{#each game.board as row, r (r)}
-		{#each row as value, c (c)}
-			<div class="cell">{value || ''}</div>
-		{/each}
-	{/each}
-</div>
+<Board board={game.board} />
 
 {#if game.won}
 	<p>You win!</p>
@@ -42,27 +37,3 @@
 {#if game.over}
 	<p>Game over.</p>
 {/if}
-
-<style>
-	.board {
-		display: grid;
-		grid-template-columns: repeat(4, 1fr);
-		gap: var(--space-2);
-		max-width: 320px;
-		margin-block: var(--space-5);
-		padding: var(--space-2);
-		background-color: var(--board-bg);
-		border-radius: var(--radius);
-	}
-
-	.cell {
-		aspect-ratio: 1;
-		display: grid;
-		place-items: center;
-		font-size: var(--font-size-xl);
-		font-weight: 700;
-		color: var(--color-heading);
-		background-color: var(--board-cell);
-		border-radius: var(--radius);
-	}
-</style>
