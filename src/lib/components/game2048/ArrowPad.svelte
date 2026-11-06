@@ -15,10 +15,6 @@
 		display: none;
 	}
 
-	/* shown on touch screens, laid out like arrow keys:
-	      ↑
-	   ←  ↓  →
-	*/
 	@media (pointer: coarse) {
 		.pad {
 			display: grid;
@@ -28,17 +24,14 @@
 		}
 	}
 
-	/* ↑ sits in the middle column of row 1 */
 	.up {
 		grid-column: 2;
 	}
 
-	/* ← must start in column 1, which forces it onto row 2; ↓ and → follow it */
 	.left {
 		grid-column: 1;
 	}
 
-	/* 3rem (about 48px) is big enough to tap without missing */
 	button {
 		height: 3rem;
 		font-size: var(--font-size-xl);

@@ -19,7 +19,6 @@
 		border-radius: var(--radius);
 	}
 
-	/* a cell with a tile in it: white text (the blue comes from style:background-color) */
 	.filled {
 		color: #ffffff;
 	}
