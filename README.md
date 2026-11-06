@@ -1,62 +1,61 @@
 # The Arcade
 
-A small static site built with **HTML and CSS only** — no JavaScript, no CSS frameworks.
-It holds a playable mini crossword, plus pages about my experience and how to reach me.
-More games will be added over the semester.
+A small arcade site built with **SvelteKit** (Svelte 5). It holds a sports-themed mini
+crossword, a game of 2048, and pages about me and how to reach me.
+
+Project 1 was plain HTML and CSS; for Project 2 it was migrated to SvelteKit. The
+original static version lives in the git history, and its planning docs, writeup and
+Lighthouse screenshot are kept in [`docs/project1/`](docs/project1/).
 
 **Live site:** <https://j03huay.github.io>
 
 ## Pages
 
-| Path       | File                 |
-| ---------- | -------------------- |
-| `/`        | `index.html`         |
-| `/game`    | `game/index.html`    |
-| `/about`   | `about/index.html`   |
-| `/contact` | `contact/index.html` |
-
-Each page lives in its own folder as `index.html`, so URLs never show `.html`.
+| Path       | Route file                          |
+| ---------- | ----------------------------------- |
+| `/`        | `src/routes/+page.svelte`           |
+| `/game`    | `src/routes/game/+page.svelte`      |
+| `/2048`    | `src/routes/2048/+page.svelte`      |
+| `/about`   | `src/routes/about/+page.svelte`     |
+| `/contact` | `src/routes/contact/+page.svelte`   |
 
 ## Structure
 
 ```
-.
-├── index.html            landing page
-├── home.css              page-specific styles, next to their page
-├── game/
-│   ├── index.html
-│   └── game.css
-├── about/
-│   ├── index.html
-│   └── about.css
-├── contact/
-│   ├── index.html
-│   └── contact.css
-└── assets/
-    ├── css/
-    │   ├── tokens.css    custom properties: colors, type scale, spacing
-    │   ├── base.css      reset and base typography
-    │   └── layout.css    shared header, nav, footer
-    ├── fonts/
-    ├── icons/
-    └── img/
+src/
+├── app.css                     design tokens (colour, type scale, spacing) and base styles
+├── lib/
+│   ├── components/
+│   │   ├── layout/             SiteHeader, NavLink, SiteFooter
+│   │   └── crossword/          CrosswordGrid, CrosswordCell, ClueList
+│   └── data/
+│       └── crossword.js        puzzle solution, clues, and cell numbering
+└── routes/
+    ├── +layout.svelte          shared header and footer for every page
+    ├── +layout.js              prerenders every page to static HTML
+    └── …                       one folder per page
+static/
+└── img/                        images served as-is
 ```
 
-Load order in every page's `<head>`: `tokens.css` → `base.css` → `layout.css` → the page's own stylesheet.
-
-## Local preview
+## Local development
 
 ```bash
-python3 -m http.server 8000
+npm install
+npm run dev
 ```
 
-Then open <http://localhost:8000>. Use a server rather than opening the files
-directly — `file://` does not resolve the directory-style URLs the same way.
+Then open <http://localhost:5173>.
 
-## Notes
+To build and preview the production version:
 
-- Built for a course project. No JavaScript anywhere in this repository, by design.
-- This is a GitHub user site, so it is served from the domain root. Links and
-  stylesheets use **root-relative** paths (`/assets/css/base.css`, `/game/`),
-  which resolve identically on every page and in local preview — so the shared
-  navigation really is the same markup on all four pages.
+```bash
+npm run build
+npm run preview
+```
+
+## Deployment
+
+The site uses `@sveltejs/adapter-static` and is deployed to GitHub Pages by
+`.github/workflows/deploy.yml` on every push to `main`. In the repository settings,
+**Pages → Source** must be set to **GitHub Actions**.

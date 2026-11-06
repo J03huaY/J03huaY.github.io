@@ -11,3 +11,12 @@
 
 # Logs / temp
 *.log
+
+# Node / SvelteKit
+node_modules
+/.svelte-kit
+/build
+.env
+.env.*
+!.env.example
+vite.config.js.timestamp-*

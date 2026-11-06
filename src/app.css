@@ -1,0 +1,129 @@
+:root {
+  /* color */
+  --color-bg: #f7f5f2;
+  --color-surface: #FFFFFF;
+  --color-heading: #1A1715;
+  --color-text: #3D3936;
+  --color-text-muted: #6B655F;
+  --color-border: #D6D1CB;
+  --color-accent: #1955DC;
+  --color-accent-soft: #EDF3FF;
+  --color-dark: #2A2740;
+
+  /* 2048 tiles: one blue hue from light to dark; numbers use --color-heading up to 64 and white from 128 */
+  --tile-2: #EEF2FB;
+  --tile-4: #DCE5F7;
+  --tile-8: #C3D3F2;
+  --tile-16: #A6BEEC;
+  --tile-32: #8AA9E6;
+  --tile-64: #7096E0;
+  --tile-128: #2F62C9;
+  --tile-256: #2556B8;
+  --tile-512: #1F4AA3;
+  --tile-1024: #1A3F8C;
+  --tile-2048: #143275;
+  --tile-super: #0D2152;
+  --board-bg: #BDB6AE;
+  --board-cell: #CFC9C2;
+
+  /* font text */
+  --font-size-sm: 13px;
+  --font-size-base: 16px;
+  --font-size-lg: 20px;
+  --font-size-xl: 25px;
+  --font-size-2xl: 31px;
+  --font-size-h1: clamp(2.25rem, 1.5rem + 3.5vw, 3.5rem);
+
+  /* space */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+
+  /* other formatting */
+  --radius: 4px;
+  --measure: 65ch;
+  --font-sans: system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;
+}
+
+img {
+  max-width: 100%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--color-heading);
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+h1 {
+  font-size: var(--font-size-h1);
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: var(--font-size-2xl);
+  letter-spacing: -0.02em;
+}
+
+h3 {
+  font-size: var(--font-size-xl);
+  letter-spacing: -0.02em;
+}
+
+h4 {
+  font-size: var(--font-size-lg);
+}
+
+h5 {
+  font-size: var(--font-size-base);
+}
+
+h6 {
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+main {
+  padding: var(--space-5) var(--space-4);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+main p {
+  max-width: var(--measure);
+  line-height: 1.5;
+  margin-bottom: var(--space-4);
+}
