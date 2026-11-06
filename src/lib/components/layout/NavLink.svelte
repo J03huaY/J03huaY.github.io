@@ -40,9 +40,16 @@
 		bottom: var(--space-1);
 	}
 
+	/* smaller side padding on phones so all five links fit on one row; still 44px+ tall for tapping */
 	@media (max-width: 600px) {
 		a {
 			text-align: center;
+			padding-inline: var(--space-2);
+		}
+
+		.current::after {
+			left: var(--space-2);
+			right: var(--space-2);
 		}
 	}
 </style>

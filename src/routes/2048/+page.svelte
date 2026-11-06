@@ -3,6 +3,7 @@
 	import Board from '#lib/components/game2048/Board.svelte';
 	import ScoreBoard from '#lib/components/game2048/ScoreBoard.svelte';
 	import GameStatus from '#lib/components/game2048/GameStatus.svelte';
+	import ArrowPad from '#lib/components/game2048/ArrowPad.svelte';
 
 	const keyToDirection = {
 		ArrowLeft: 'left',
@@ -32,5 +33,5 @@
 <ScoreBoard score={game.score} best={game.best} />
 <GameStatus won={game.won} over={game.over} />
 <Board board={game.board} />
-
+<ArrowPad onmove={(direction) => game.play(direction)} />
 
