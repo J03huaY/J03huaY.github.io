@@ -1,6 +1,8 @@
 <script>
 	import { game } from '#lib/game2048/game.svelte.js';
 	import Board from '#lib/components/game2048/Board.svelte';
+	import ScoreBoard from '#lib/components/game2048/ScoreBoard.svelte';
+	import GameStatus from '#lib/components/game2048/GameStatus.svelte';
 
 	const keyToDirection = {
 		ArrowLeft: 'left',
@@ -27,13 +29,8 @@
 <p>Use the arrow keys to slide the tiles. Equal tiles merge. Reach 2048 to win.</p>
 
 <button onclick={() => game.newGame()}>New Game</button>
-<p>Score: {game.score} · Best: {game.best}</p>
-
+<ScoreBoard score={game.score} best={game.best} />
+<GameStatus won={game.won} over={game.over} />
 <Board board={game.board} />
 
-{#if game.won}
-	<p>You win!</p>
-{/if}
-{#if game.over}
-	<p>Game over.</p>
-{/if}
+
